@@ -19,6 +19,13 @@
 - **Associated VPC, Internet Gateway, Security Groups, and Subnets** Operator managed networking resources for the EKS 
 Cluster and worker node instances
 - **Associated IAM Roles and Policies** Operator managed access resources for EKS and worker node instances
+- **terraform --version**
+        Terraform v0.12.5
+            + provider.aws v2.20.0
+            + provider.http v1.1.1
+ - **aws --version**
+        aws-cli/1.16.192 Python/3.6.8 
+
 
 ### 🎨 Architecture
 
