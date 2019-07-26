@@ -28,7 +28,7 @@ resource "aws_route_table" "rt-1a-prv" {
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
 
-  tags {
+  tags = {
     Name        = "${var.env}-rt-1a-prv"
     Environment = "${var.env}"
   }
@@ -70,7 +70,7 @@ resource "aws_route_table" "subnet-1c-prv" {
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
 
-  tags {
+  tags = {
     Name        = "${var.env}-rt-1c-prv"
     Environment = "${var.env}"
   }

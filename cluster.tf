@@ -16,7 +16,7 @@ resource "aws_security_group" "eks-cluster" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name        = "${var.cluster_defaults["name"]}-sg"
     Environment = "${var.env}"
   }
@@ -49,15 +49,16 @@ resource "aws_eks_cluster" "eks-cluster" {
   vpc_config {
     security_group_ids = ["${aws_security_group.eks-cluster.id}"]
 
-    subnet_ids = [
-      "${aws_subnet.subnet-1a-prv.*.id}",
-      "${aws_subnet.subnet-1c-prv.*.id}",
-    ]
+    subnet_ids = flatten([
+        "${aws_subnet.subnet-1a-prv.*.id}",
+        "${aws_subnet.subnet-1c-prv.*.id}",
+  ])
+
   }
 
-  depends_on = [
-    "aws_iam_role_policy_attachment.k8s-cluster-AmazonEKSClusterPolicy",
-    "aws_iam_role_policy_attachment.k8s-cluster-AmazonEKSServicePolicy",
+  depends_on = [ 
+       "aws_iam_role_policy_attachment.k8s-cluster-AmazonEKSClusterPolicy",
+       "aws_iam_role_policy_attachment.k8s-cluster-AmazonEKSServicePolicy",
   ]
 }
 

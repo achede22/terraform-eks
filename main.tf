@@ -24,11 +24,11 @@ resource "aws_vpc" "vpc" {
 #|_|   |_| \_\\___/  \_/  |___|____/|_____|_| \_\
 
 # Specify the provider and access details
-provider "aws" {
-  shared_credentials_file = "./credentials"
-  profile                 = "live"
-  region                  = "${var.region}"
-}
+## provider "aws" {
+#  shared_credentials_file = "~/.aws/credentials"
+#  profile                 = "live"
+#  region                  = "${var.region}"
+#}
 
 # Using these data sources allows the configuration to be
 # generic for any region.
@@ -52,7 +52,7 @@ provider "http" {}
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.vpc.id}"
 
-  tags {
+  tags = {
     Name        = "${var.env}-igw"
     Environment = "${var.env}"
   }

@@ -106,10 +106,10 @@ resource "aws_autoscaling_group" "autoscaling-group" {
   min_size             = "${var.nodes_defaults["asg_min_size"]}"
   name                 = "${var.nodes_defaults["name"]}-asg"
 
-  vpc_zone_identifier = [
+  vpc_zone_identifier = flatten([
     "${aws_subnet.subnet-1a-prv.*.id}",
     "${aws_subnet.subnet-1c-prv.*.id}",
-  ]
+  ])
 
   tag {
     key                 = "Name"
